@@ -4,12 +4,16 @@ using System.Collections.Generic;
 
 public class Main : MonoBehaviour {
 	static public Main S;
+	static public Dictionary<WeaponType, WeaponDefinition> W_DEFS;
 
 	public GameObject[] 		prefabEnemies;
 	public float 				enemySpawnPerSecond = 0.5f;
 	public float 				enemySpawnPadding = 1.5f;
+	public WeaponDefinition[] 	weaponDefinitions;
 
 	public bool 	_______________;
+
+	public WeaponType[] 		activeWeaponTypes;
 
 	public float 			enemySpawnRate;
 
@@ -19,7 +23,25 @@ public class Main : MonoBehaviour {
 		enemySpawnRate = 1f / enemySpawnPerSecond;
 		Invoke ( "SpawnEnemy", enemySpawnRate);
 
+		W_DEFS = new Dictionary<WeaponType, WeaponDefinition> ();
+		foreach (WeaponDefinition def in weaponDefinitions) {
+			W_DEFS[def.type] = def;
+				}
+
 	}
+		static public WeaponDefinition GetWeaponDfinition( WeaponType wt ) {
+			if (W_DEFS.ContainsKey (wt)) {
+			return( W_DEFS[wt]);
+				}
+		return(new WeaponDefinition ());
+		}
+
+	void Start() {
+		activeWeaponTypes = new WeaponType[weaponDefinitions.Length];
+		for (int i =0; i<weaponDefinitions.Length; i++) {
+			activeWeaponTypes[i] = weaponDefinitions[i].type;
+				}
+		}
 
 	public void SpawnEnemy(){
 		int ndx = Random.Range (0, prefabEnemies.Length);
@@ -34,14 +56,13 @@ public class Main : MonoBehaviour {
 
 
 	}
+	public void DelayedRestart( float delay ) {
+		Invoke ("Restart", delay);
+		}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public void Restart() {
+		Application.LoadLevel("_Scene_0");
+		}
+
+
 }
