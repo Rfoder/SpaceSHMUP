@@ -93,7 +93,8 @@ public class Utils : MonoBehaviour
 	}
 	
 	// Checks to see if bounds lilb are within Bounds bigB
-	public static Vector3 BoundsInBoundsCheck (Bounds bigB, Bounds lilB, BoundsTest test = BoundsTest.onScreen) {
+	public static Vector3 BoundsInBoundsCheck (Bounds bigB, Bounds lilB, 
+	                                           BoundsTest test = BoundsTest.onScreen) {
 		// behavior needs to be different depending on the test selected
 		
 		Vector3 pos = lilB.center;		// use center for measurement
@@ -191,7 +192,18 @@ public class Utils : MonoBehaviour
 		return (Vector3.zero);  // if we get here something went wrong
 	
 	} // end BoundsInBoundsCheck
-	
+	public static GameObject FindTaggedParent(GameObject go) {
+		if (go.tag != "Untagged") {
+			return (go);
+		}
+		if (go.transform.parent == null) {
+			return( null );
+		}
+		return( FindTaggedParent( go.transform.parent.gameObject ) );
+	}
+	public static GameObject FindTaggedParent(Transform t) {
+		return (FindTaggedParent (t.gameObject));
+	}
 	
 	
 }// End of Util Class
