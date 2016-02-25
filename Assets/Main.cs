@@ -29,7 +29,7 @@ public class Main : MonoBehaviour {
 				}
 
 	}
-		static public WeaponDefinition GetWeaponDfinition( WeaponType wt ) {
+		static public WeaponDefinition GetWeaponDefinition( WeaponType wt ) {
 			if (W_DEFS.ContainsKey (wt)) {
 			return( W_DEFS[wt]);
 				}

@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour {
 	}
 	public void SetType( WeaponType eType ) {
 		_type = eType;
-		WeaponDefinition def = Main.GetWeaponDfinition (_type);
+		WeaponDefinition def = Main.GetWeaponDefinition (_type);
 		renderer.material.color = def.projectileColor;
 	}
 

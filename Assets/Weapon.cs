@@ -61,7 +61,7 @@ public class Weapon : MonoBehaviour {
 				} else {
 						this.gameObject.SetActive (true);
 				}
-		def = Main.GetWeaponDfinition (_type);
+		def = Main.GetWeaponDefinition (_type);
 		collar.renderer.material.color = def.color;
 		lastShot = 0;
 		//
