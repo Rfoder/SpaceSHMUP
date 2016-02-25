@@ -13,6 +13,8 @@ public class Hero : MonoBehaviour {
 
 	private float	_shieldLevel = 1;
 
+	public Weapon[] 		weapons;
+
 	public bool	_____________________;
 	public Bounds bounds;
 
@@ -23,6 +25,9 @@ public class Hero : MonoBehaviour {
 	void Awake(){
 		S = this;
 		bounds = Utils.CombineBoundsOfChildren (this.gameObject);
+
+		ClearWeapons ();
+		weapons [0].SetType (WeaponType.blaster);
 	}
 
 
@@ -57,7 +62,7 @@ public class Hero : MonoBehaviour {
 			fireDelegate();
 				}
 	}
-
+	//here
 	public GameObject lastTriggerGo = null;
 		void OnTriggerEnter(Collider other) {
 
@@ -71,6 +76,9 @@ public class Hero : MonoBehaviour {
 			if (go.tag == "Enemy") {
 				shieldLevel--;
 				Destroy(go);
+
+			} else if (go.tag == "PowerUp") {
+				AbsorbPowerUp(go);
 			} else {
 			print ("Triggered: " + go.name);
 			}
@@ -92,6 +100,8 @@ public class Hero : MonoBehaviour {
 
 			Main.S.DelayedRestart( gameRestartDelay );
 		}
+
+
 	}
  }
 }
